@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.yogith.exampleevent.AddEventActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:text="Title"
+        android:textSize="25dp" />
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_height="wrap_content"
+        android:layout_width="244dp"
+        android:inputType="text"
+        android:layout_alignBaseline="@+id/titleTextView"
+        android:layout_alignBottom="@+id/titleTextView"
+        android:layout_toRightOf="@+id/titleTextView"
+        android:layout_toEndOf="@+id/titleTextView"
+        android:layout_marginLeft="56dp"
+        android:layout_marginStart="56dp" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="25dp"
+        android:layout_below="@+id/titleEditText"
+        android:layout_alignLeft="@+id/titleTextView"
+        android:layout_alignStart="@+id/titleTextView"
+        android:layout_marginTop="48dp" />
+
+    <TextView
+        android:id="@+id/Ddate"
+        android:layout_width="244sp"
+        android:layout_height="wrap_content"
+        android:hint = "Select Date"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/dateTextView"
+        android:layout_alignBottom="@+id/dateTextView"
+        android:layout_alignStart="@+id/titleEditText" />
+
+
+
+</RelativeLayout>

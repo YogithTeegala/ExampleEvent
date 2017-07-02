@@ -13,11 +13,12 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-
+    //DBHelper dBHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //dBHelper = new DBHelper(this);
     }
     public void addButton(View view) {
         Intent intent = new Intent(this, AddEventActivity.class);

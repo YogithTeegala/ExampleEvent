@@ -3,6 +3,7 @@ package com.example.yogith.exampleevent;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,17 +25,26 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class AddEventActivity extends AppCompatActivity {
-
     public TextView date, time;
+    public EditText editTitle;
+    public Button save;
+    public String inputDate;
+    DBHelper dBHelper;
     private DatePickerDialog.OnDateSetListener onDateSet;
     private TimePickerDialog.OnTimeSetListener onTimeSet;
+//    dBHelper = new DBHelper(this);
+//    SQLiteDatabase db = dBHelper.getWritableDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-
+        editTitle = (EditText) findViewById(R.id.titleEditText) ;
         date = (TextView) findViewById(R.id.dateDisplay);
+        time = (TextView) findViewById(R.id.timeDisplay);
+        save = (Button) findViewById(R.id.saveButton);
+        dBHelper = new DBHelper(this);
+        SQLiteDatabase db = dBHelper.getWritableDatabase();
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,11 +62,10 @@ public class AddEventActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String inputDate = day + "/" + month + "/" + year;
+                inputDate = day + "/" + month + "/" + year;
                 date.setText(inputDate);
             }
         };
-        time = (TextView) findViewById(R.id.timeDisplay);
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,5 +83,12 @@ public class AddEventActivity extends AppCompatActivity {
                 time.setText(inputTime);
             }
         };
+    }
+    public void addData(View view){
+                if(dBHelper.insertData(editTitle.getText().toString(), date.getText().toString(),
+                        time.getText().toString()))
+                    Toast.makeText(AddEventActivity.this, "Event saved", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(AddEventActivity.this, "Event not saved", Toast.LENGTH_LONG).show();
     }
 }

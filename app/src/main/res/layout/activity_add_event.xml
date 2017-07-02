@@ -70,6 +70,15 @@
         android:layout_alignBottom="@+id/timeTextView"
         android:layout_alignStart="@+id/titleEditText" />
 
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/timeDisplay"
+        android:layout_below="@+id/timeTextView"
+        android:layout_marginTop="67dp"
+        android:onClick="addData"
+        android:text="Save" />
 
 
 </RelativeLayout>

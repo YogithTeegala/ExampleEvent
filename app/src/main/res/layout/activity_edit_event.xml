@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yogith.exampleevent.EditEventActivity">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:text="Title"
+        android:textSize="25dp" />
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_height="wrap_content"
+        android:layout_width="244dp"
+        android:inputType="text"
+        android:layout_alignBaseline="@+id/titleTextView"
+        android:layout_alignBottom="@+id/titleTextView"
+        android:layout_toRightOf="@+id/titleTextView"
+        android:layout_toEndOf="@+id/titleTextView"
+        android:layout_marginLeft="56dp"
+        android:layout_marginStart="56dp" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="25dp"
+        android:layout_below="@+id/titleEditText"
+        android:layout_alignLeft="@+id/titleTextView"
+        android:layout_alignStart="@+id/titleTextView"
+        android:layout_marginTop="48dp" />
+
+    <TextView
+        android:id="@+id/dateDisplay"
+        android:layout_width="244sp"
+        android:layout_height="wrap_content"
+        android:hint = "Select Date"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/dateTextView"
+        android:layout_alignBottom="@+id/dateTextView"
+        android:layout_alignStart="@+id/titleEditText" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textSize="25dp"
+        android:layout_below="@+id/dateTextView"
+        android:layout_alignLeft="@+id/titleTextView"
+        android:layout_alignStart="@+id/titleTextView"
+        android:layout_marginTop="48dp" />
+
+    <TextView
+        android:id="@+id/timeDisplay"
+        android:layout_width="244sp"
+        android:layout_height="wrap_content"
+        android:hint = "Select Time"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/timeTextView"
+        android:layout_alignBottom="@+id/timeTextView"
+        android:layout_alignStart="@+id/titleEditText" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="69dp"
+        android:onClick="updateEvent"
+        android:text="Update"
+        android:layout_below="@+id/timeTextView"
+        android:layout_toEndOf="@+id/dateTextView" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/saveButton"
+        android:layout_marginStart="55dp"
+        android:onClick="deleteEvent"
+        android:layout_toEndOf="@+id/saveButton"
+        android:text="Delete" />
+
+
+</RelativeLayout>

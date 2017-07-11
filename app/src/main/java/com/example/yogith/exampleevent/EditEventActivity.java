@@ -98,9 +98,6 @@ public class EditEventActivity extends AppCompatActivity{
                 time.setText(inputTime);
             }
         };
-
-
-
     }
     public void updateEvent(View view){
         String inputTitle = title.getText().toString();

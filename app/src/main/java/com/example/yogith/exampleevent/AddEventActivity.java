@@ -98,5 +98,4 @@ public class AddEventActivity extends AppCompatActivity {
         Intent editIntent = new Intent(AddEventActivity.this, MainActivity.class);
         startActivity(editIntent);
     }
-
 }

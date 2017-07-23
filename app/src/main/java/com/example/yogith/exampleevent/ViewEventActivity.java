@@ -17,16 +17,19 @@ import java.util.ArrayList;
 
 public class ViewEventActivity extends AppCompatActivity {
     DBHelper dBHelper;
-    String title, date, time, eTitle;
+    MainActivity main;
+    String title, eTitle;
     private ListView listViewEvent;
-    int ID;
+    int ID, time, date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_event);
         listViewEvent = (ListView) findViewById(R.id.listView);
         dBHelper = new DBHelper(this);
+        main = new MainActivity();
         displayList();
+        //main.eventFinder();
     }
     private void displayList(){
         Cursor data = dBHelper.fetchData();
@@ -34,7 +37,6 @@ public class ViewEventActivity extends AppCompatActivity {
         while(data.moveToNext()){
             eTitle=data.getString(1);
             listData.add(eTitle);
-            //listData.add(data.getString(2));
         }
 
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
@@ -45,21 +47,23 @@ public class ViewEventActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String object = parent.getItemAtPosition(position).toString();
                 Cursor data = dBHelper.getItemID(object);
-                int itemID = -1;
+                int itemID = -1, xtraID = -1;
                 while(data.moveToNext()){
                     itemID = data.getInt(0);
+//                    xtraID = data.getInt(1);
                 }
+//                Toast.makeText(ViewEventActivity.this, itemID +" "+xtraID, Toast.LENGTH_LONG).show();
                 if(itemID > -1){
                     Intent editIntent = new Intent(ViewEventActivity.this, EditEventActivity.class);
-                    Cursor ata = dBHelper.fetchData();
-                    while(ata.moveToNext()) {
-                        ID = ata.getInt(0);
+                    Cursor event = dBHelper.fetchData();
+                    while(event.moveToNext()) {
+                        ID = event.getInt(0);
                         if(itemID==ID)
                             break;
                     }
-                    title = ata.getString(1);
-                    date = ata.getString(2);
-                    time = ata.getString(3);
+                    title = event.getString(1);
+                    date = event.getInt(2);
+                    time = event.getInt(3);
 
                     editIntent.putExtra("id", itemID);
                     editIntent.putExtra("title", title);

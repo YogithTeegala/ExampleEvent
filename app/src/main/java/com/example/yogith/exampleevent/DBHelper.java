@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " ("+Col_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ Col_2 + " TEXT, " + Col_3+" TEXT, "+Col_4+" TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " ("+Col_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ Col_2 + " TEXT, " + Col_3+" INTEGER, "+Col_4+" INTEGER)");
         Log.d(TAG, "onCreate: ");
     }
 
@@ -34,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
-    public boolean insertData(String title, String date, String time){
+    public boolean insertData(String title, int date, int time){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Col_2, title);
@@ -54,8 +54,13 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select "+ Col_1 + " from "+ TABLE_NAME + " where " + Col_2 + " = '" + title + "'", null);
         return res;
     }
+    public Cursor getEvent(int date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+ TABLE_NAME + " where " + Col_2 + " = '" + date + "'", null);
+        return res;
+    }
 
-    public void updateData(String newTitle, String oldTitle, String newDate, String newTime, int id){
+    public void updateData(String newTitle, String oldTitle, int newDate, int newTime, int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE "+ TABLE_NAME + " SET " +
                 Col_2 + "= '"+ newTitle +"', "+
@@ -63,8 +68,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 Col_4 + "= '"+ newTime + "' WHERE "+
                 Col_1 +"= '" + id + "'" + " AND "+
                 Col_2 +"= '" + oldTitle + "'");
+
     }
-    public void deleteData(int id, String title){
+    public void deleteData(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM "+ TABLE_NAME + " WHERE "+
                 Col_1 + " = '"+id + "'"

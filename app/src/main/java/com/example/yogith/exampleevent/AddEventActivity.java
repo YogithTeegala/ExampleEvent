@@ -31,8 +31,8 @@ public class AddEventActivity extends AppCompatActivity {
     public TextView date, time;
     public EditText editTitle;
     public Button save;
-    public String formattedDate, formattedDay, formattedMonth, formattedTime, formattedHour, formattedMinute;
-    public int inputDate, inputTime;
+    public String formattedDate, formattedDay, formattedMonth, formattedTime, formattedHour, formattedMinute, inputTime;
+    public int inputDate;
     DBHelper dBHelper;
     private DatePickerDialog.OnDateSetListener onDateSet;
     private TimePickerDialog.OnTimeSetListener onTimeSet;
@@ -87,10 +87,11 @@ public class AddEventActivity extends AppCompatActivity {
         onTimeSet = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                Toast.makeText(AddEventActivity.this, hourOfDay+" "+minute, Toast.LENGTH_LONG).show();
+
                 formattedHour = String.format("%02d", hourOfDay);
                 formattedMinute = String.format("%02d", minute);
-                inputTime = Integer.parseInt(formattedHour + formattedMinute);
+                inputTime = formattedHour + formattedMinute;
+                Toast.makeText(AddEventActivity.this, formattedHour+" "+formattedMinute+" "+inputTime, Toast.LENGTH_LONG).show();
                 if(hourOfDay>12) {
                     int hour = hourOfDay-12;
                     formattedHour = String.format("%02d", hour);

@@ -25,8 +25,8 @@ public class EditEventActivity extends AppCompatActivity{
     public EditText title;
     public TextView date, time;
 
-    public String formattedDate, formattedDay, formattedMonth, formattedReceivedTime, formattedReceivedHour, formattedReceivedMin, formattedTime, formattedHour, formattedMinute, selectedTitle, selectedTime, selectedDate;
-    public int inputDate, inputTime, selectedID, receivedDate, receivedTime, receivedHour, receivedMin;
+    public String formattedDate, formattedDay, formattedMonth, formattedReceivedTime, formattedReceivedHour, formattedReceivedMin, formattedTime, formattedHour, formattedMinute, selectedTitle, selectedTime, selectedDate, inputTime;
+    public int inputDate, selectedID, receivedDate, receivedHour, receivedMin, receivedTime;
     DBHelper dBHelper;
     private DatePickerDialog.OnDateSetListener onDateSet;
     private TimePickerDialog.OnTimeSetListener onTimeSet;
@@ -50,11 +50,11 @@ public class EditEventActivity extends AppCompatActivity{
 
         selectedDate = String.valueOf(receivedDate).substring(6, 8)+"/"+String.valueOf(receivedDate).substring(4, 6)+"/"+String.valueOf(receivedDate).substring(0, 4);
 
-        receivedTime = receivedIntent.getIntExtra("time", -1);
+        receivedTime = Integer.valueOf(receivedIntent.getStringExtra("time"));
         formattedReceivedTime = String.format("%04d", receivedTime);
         receivedHour = Integer.valueOf(formattedReceivedTime.substring(0, 2));
         receivedMin =  Integer.valueOf(formattedReceivedTime.substring(2, 4));
-        Toast.makeText(EditEventActivity.this,""+ formattedReceivedTime+" "+receivedHour, Toast.LENGTH_LONG).show();
+        Toast.makeText(EditEventActivity.this,""+ formattedReceivedTime+" "+receivedDate, Toast.LENGTH_LONG).show();
         formattedReceivedHour = String.format("%02d", receivedHour);
         formattedReceivedMin = String.format("%02d", receivedMin);
         if(receivedHour>12) {
@@ -77,7 +77,7 @@ public class EditEventActivity extends AppCompatActivity{
 
         //inputTitle = selectedTitle;
         inputDate = receivedDate;
-        inputTime = receivedTime;
+        inputTime = String.format("%04d", receivedTime);
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +119,7 @@ public class EditEventActivity extends AppCompatActivity{
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 formattedHour = String.format("%02d", hourOfDay);
                 formattedMinute = String.format("%02d", minute);
-                inputTime = Integer.parseInt(formattedHour + formattedMinute);
+                inputTime = formattedHour + formattedMinute;
                 if(hourOfDay>12) {
                     int hour = hourOfDay-12;
                     formattedHour = String.format("%02d", hour);

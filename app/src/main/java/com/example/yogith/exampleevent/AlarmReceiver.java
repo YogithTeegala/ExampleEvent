@@ -16,6 +16,8 @@ import android.support.v4.app.NotificationCompat;
 public class AlarmReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
+        EditEventActivity editEventActivity = new EditEventActivity();
+        String eventTitle, eventTime;
         // TODO Auto-generated method stub
 
         NotificationManager notificationManager = (NotificationManager) context
@@ -27,13 +29,16 @@ public class AlarmReceiver extends BroadcastReceiver{
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        Intent receivedIntent  = editEventActivity.getIntent();
+//        eventTitle = receivedIntent.getStringExtra("title");
+//        eventTime = receivedIntent.getStringExtra("time");
 
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(
                 context).setSmallIcon(R.drawable.notif)
-                .setContentTitle("Alarm Fired")
-                .setContentText("Events To be Performed")
+                .setContentTitle("ff")
+                .setContentText("Due at ")
                 .setSound(alarmSound)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);

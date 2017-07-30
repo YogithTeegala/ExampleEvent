@@ -18,9 +18,9 @@ import java.util.ArrayList;
 public class ViewEventActivity extends AppCompatActivity {
     DBHelper dBHelper;
     MainActivity main;
-    String title, eTitle;
+    String title, eTitle, time;
     private ListView listViewEvent;
-    int ID, time, date;
+    int ID, date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +63,7 @@ public class ViewEventActivity extends AppCompatActivity {
                     }
                     title = event.getString(1);
                     date = event.getInt(2);
-                    time = event.getInt(3);
+                    time = event.getString(3);
 
                     editIntent.putExtra("id", itemID);
                     editIntent.putExtra("title", title);

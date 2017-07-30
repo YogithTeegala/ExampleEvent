@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " ("+Col_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ Col_2 + " TEXT, " + Col_3+" INTEGER, "+Col_4+" INTEGER)");
+        db.execSQL("create table " + TABLE_NAME + " ("+Col_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ Col_2 + " TEXT, " + Col_3+" INTEGER, "+Col_4+" TEXT)");
         Log.d(TAG, "onCreate: ");
     }
 
@@ -34,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
-    public boolean insertData(String title, int date, int time){
+    public boolean insertData(String title, int date, String time){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Col_2, title);
@@ -60,7 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public void updateData(String newTitle, String oldTitle, int newDate, int newTime, int id){
+    public void updateData(String newTitle, String oldTitle, int newDate, String newTime, int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE "+ TABLE_NAME + " SET " +
                 Col_2 + "= '"+ newTitle +"', "+
